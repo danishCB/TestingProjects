@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         listHash = new HashMap<>();
 
         listDataHeader.add("Windows");
-        listDataHeader.add("Android");
+        listDataHeader.add("Android123");
         listDataHeader.add("MAC1235");
 
         List<String> windows = new ArrayList<>();
