@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         listDataHeader.add("Windows");
         listDataHeader.add("Android");
-        listDataHeader.add("MAC12");
+        listDataHeader.add("MAC123");
 
         List<String> windows = new ArrayList<>();
         windows.add("Windows 7");
