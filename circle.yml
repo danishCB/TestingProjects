@@ -85,7 +85,7 @@ jobs:
     #        command: chmod +x ./gradlew
     - save_cache:
         paths:
-        - ~/.gradle
+          - ~/.gradle
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - store_artifacts:
         path: app/build/reports
