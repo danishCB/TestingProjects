@@ -63,7 +63,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/JenkinsSamples
+    working_directory: ~/TestingProjects/
     docker:
     - image: circleci/android:api-25-alpha
     environment:
@@ -78,14 +78,14 @@ jobs:
     - restore_cache:
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - run:
-       name: Download Dependencies
-       command: chmod +x ./gradlew
+        name: Download Dependencies
+        command: chmod +x ./gradlew
     #    - run:
     #        name: chmod permissions
     #        command: chmod +x ./gradlew
     - save_cache:
         paths:
-          - ~/.gradle
+        - ~/.gradle
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - store_artifacts:
         path: app/build/reports
@@ -97,7 +97,7 @@ jobs:
         command: ./gradlew build
     - store_artifacts:
         path: app/build/outputs/apk/debug/
-        destination: artifact-file
+        destination: apks/
 
 
 
