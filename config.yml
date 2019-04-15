@@ -1,0 +1,90 @@
+
+##
+## Build configuration for Circle CI
+##
+#
+#
+#
+#general:
+#  artifacts:
+#  - D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
+#
+#machine:
+#  environment:
+#    ANDROID_HOME: C:\Users\Danish\AppData\Local\Android\Sdk
+#
+#dependencies:
+#  override:
+#  - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-26.0.2,android-26,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+#  - ANDROID_HOME= C:\Users\Danish\AppData\Local\Android\Sdk ./gradlew dependencies
+#
+#test:
+#  override:
+#  - (./gradlew assemble):
+#timeout: 360
+
+
+version: 1
+jobs:
+  build:
+    working_directory: ~/TesingProjects
+    docker:
+    - image: circleci/android:api-25-alpha
+    environment:
+      JVM_OPTS: -Xmx1536m
+    steps:
+    - checkout
+    - restore_cache:
+        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+    #      - run:
+    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+    #         command: sudo chmod +x ./gradlew
+    - run:
+        name: chmod permissions
+        command: chmod +x ./gradlew
+    - save_cache:
+        paths:
+        - ~/.gradle
+        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    - store_artifacts:
+        path: app/build/reports
+        destination: reports
+    - store_test_results:
+        path: app
+    - run:
+        name: Run Build
+        command: ./gradlew build
+    - store_artifacts:
+        path: app
+        destination: artifact-file
+
+#    - save_cache:
+#        paths:
+#        - ~/.gradle
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+#    - run:
+#        name: chmod permissions
+#        command: chmod +x ./gradlew
+#    - store_artifacts:
+#        path: app/build/reports
+#    - store_test_results:
+#        path: presentation/build/test-results
+#    - run:
+#        name: Run Domain Module Unit Tests
+#        command: ./gradlew :domain:test
+#    - store_artifacts:
+#        path: domain/build/reports
+#    - store_test_results:
+#        path: domain/build/test-results
+#    - run:
+#        name: Run Data Module Unit Tests
+#        command: ./gradlew :data:testDebugUnitTest
+#    - store_artifacts:
+#        path: data/build/reports
+#    - store_test_results:
+#        path: data/build/test-results
+#    - run:
+#        name: Run Lint Test
+#        command: ./gradlew lint
+#    - store_artifacts:
+#    path: D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
