@@ -96,7 +96,7 @@ jobs:
        name: Run Build
        command: ./gradlew build
     - store_artifacts:
-       path: app/
+       path: app/build/outputs/apk
        destination: artifact-files
 
 
