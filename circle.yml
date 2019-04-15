@@ -49,12 +49,12 @@ jobs:
         path: app/build/reports
         destination: reports
     - store_test_results:
-        path: app/build/test-results
+        path: app
     - run:
         name: Run Build
         command: ./gradlew build
     - store_artifacts:
-        path: app/build/outputs/apk/debug/
+        path: app
         destination: artifact-file
 
 #    - save_cache:
