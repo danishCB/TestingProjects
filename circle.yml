@@ -26,7 +26,7 @@
 version: 1
 jobs:
   build:
-    working_directory: ~/home/circleci
+    working_directory: ~/TesingProjects
     docker:
     - image: circleci/android:api-25-alpha
     environment:
@@ -56,6 +56,7 @@ jobs:
     - store_artifacts:
         path: app/build/outputs/apk/debug/
         destination: artifact-file
+
 #    - save_cache:
 #        paths:
 #        - ~/.gradle
