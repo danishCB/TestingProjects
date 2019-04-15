@@ -92,9 +92,12 @@ jobs:
         destination: reports
     - store_test_results:
         path: app/
-    - run:
-        name: Run Build
-        command: ./gradlew assembleDebug
+     - run:
+        name: Initial build
+        command: ./gradlew clean assembleRelease --no-daemon --stacktrace
+#     - run:
+#         name: Run Build
+#         command: ./gradlew assembleDebug
     - store_artifacts:
         path: app/
         destination: artifact-files
