@@ -26,7 +26,7 @@
 version: 1
 jobs:
   build:
-    working_directory: ~/Android-Kotlin-Clean-Architecture
+    working_directory: ~D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
     docker:
     - image: circleci/android:api-25-alpha
     environment:
