@@ -63,7 +63,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/TesingProjects
+    working_directory: ~/JenkinsSamples
     docker:
     - image: circleci/android:api-25-alpha
     environment:
