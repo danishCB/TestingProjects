@@ -26,7 +26,7 @@
 version: 1
 jobs:
   build:
-    working_directory: /TesingProjects
+    working_directory: ~ TesingProjects
     docker:
     - image: circleci/android:api-25-alpha
     environment:
