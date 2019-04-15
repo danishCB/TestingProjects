@@ -70,7 +70,7 @@ jobs:
       JVM_OPTS: -Xmx1536m
     steps:
     - checkout
-      #    - restore_cache:
+    #    - restore_cache:
     #        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
     #      - run:
     #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
@@ -78,8 +78,8 @@ jobs:
     - restore_cache:
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - run:
-        name: Download Dependencies
-        command: ./gradlew androidDependencies
+      name: Download Dependencies
+      command: ./gradlew androidDependencies
     #    - run:
     #        name: chmod permissions
     #        command: chmod +x ./gradlew
