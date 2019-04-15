@@ -26,7 +26,7 @@
 version: 1
 jobs:
   build:
-    working_directory: ~D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
+    working_directory: ~D:/DanishWork/JenkinsSamples/TestingProjects/TestingProjects/
     docker:
     - image: circleci/android:api-25-alpha
     environment:
