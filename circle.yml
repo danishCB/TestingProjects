@@ -26,7 +26,7 @@
 version: 1
 jobs:
   build:
-    working_directory: ~ /Desktop/CircleCI
+    working_directory: ~ /home/circleci
     docker:
     - image: circleci/android:api-25-alpha
     environment:
