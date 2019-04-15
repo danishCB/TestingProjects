@@ -47,15 +47,15 @@ jobs:
         - ~/.gradle
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - store_artifacts:
-        path: app/build/reports
+        path: app/build/
         destination: reports
     - store_test_results:
-        path: app/build/test-results
+        path: app/build/
     - run:
         name: Run Build
         command: ./gradlew build
     - store_artifacts:
-        path: app/build/reports
+        path: app/build/
         destination: artifact-file
 
 #    - save_cache:
