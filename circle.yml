@@ -24,39 +24,76 @@
 #timeout: 360
 
 
-version: 2
-jobs:
-  build:
-    working_directory: ~/TesingProjects
-    docker:
-    - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx1536m
-    steps:
-    - checkout
-#    - restore_cache:
-#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-    #      - run:
-    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-    #         command: sudo chmod +x ./gradlew
-    - run:
-        name: chmod permissions
-        command: chmod +x ./gradlew
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - store_artifacts:
-        path: app/build/reports
-        destination: reports
-    - store_test_results:
-        path: app/build/test-results
-    - run:
-        name: Run Build
-        command: ./gradlew build
-    - store_artifacts:
-        path: app/build/outputs/apk/debug/
-        destination: artifact-file
+
+dependencies:
+  override:
+  - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-26.0.2,android-26,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+  - ANDROID_HOME=C:\Users\Danish\AppData\Local\Android\Sdk ./gradlew dependencies
+
+#Pull any submodules
+checkout:
+  post:
+  - git submodule init
+  - git submodule update
+
+#-PdisablePreDex is a must else gradle just dies due to memory limit
+#Replace
+test:
+  override:
+  - (./gradlew assemble -PdisablePreDex):
+      timeout: 360
+  - cp -r ${HOME}/${TestingProjects}/app/build/outputs/apk/ $CIRCLE_ARTIFACTS
+  - emulator -avd circleci-android22 -no-audio -no-window:
+      background: true
+      parallel: true
+  # wait for it to have booted
+  - circle-android wait-for-boot
+  # run tests  against the emulator.
+  - ./gradlew connectedAndroidTest
+
+#Deploy when tests pass
+deployment:
+  master:
+    branch: master
+    commands:
+    - (./gradlew crashlyticsUploadDistributionProduction -PdisablePreFex):
+timeout: 720
+
+
+
+#version: 2
+#jobs:
+#  build:
+#    working_directory: ~/TesingProjects
+#    docker:
+#    - image: circleci/android:api-25-alpha
+#    environment:
+#      JVM_OPTS: -Xmx1536m
+#    steps:
+#    - checkout
+##    - restore_cache:
+##        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+#    #      - run:
+#    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#    #         command: sudo chmod +x ./gradlew
+#    - run:
+#        name: chmod permissions
+#        command: chmod +x ./gradlew
+#    - save_cache:
+#        paths:
+#        - ~/.gradle
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#    - store_artifacts:
+#        path: app/build/reports
+#        destination: reports
+#    - store_test_results:
+#        path: app/build/test-results
+#    - run:
+#        name: Run Build
+#        command: ./gradlew build
+#    - store_artifacts:
+#        path: app/build/outputs/apk/debug/
+#        destination: artifact-file
 
 
 
