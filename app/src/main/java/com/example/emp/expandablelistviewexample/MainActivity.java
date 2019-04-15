@@ -42,11 +42,9 @@ public class MainActivity extends AppCompatActivity {
                         listView.collapseGroup(i);
                     }
                 }
-
             }
         });
     }
-
 
     private void initData() {
         listDataHeader = new ArrayList<>();
