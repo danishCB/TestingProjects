@@ -27,10 +27,8 @@ version: 1
 jobs:
   build:
     working_directory: ~/Android-Kotlin-Clean-Architecture
-    docker:
-    - image: circleci/android:api-25-alpha
     environment:
-      JVM_OPTS: -Xmx3200m
+      JVM_OPTS: -Xmx1536m
     steps:
     - checkout
     - restore_cache:
@@ -49,7 +47,7 @@ jobs:
         name: Run Presentation Module Unit Tests
         command: ./gradlew :presentation:testDebugUnitTest
     - store_artifacts:
-        path: D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
+        path: app/build/reports
     - store_test_results:
         path: presentation/build/test-results
     - run:
