@@ -97,8 +97,7 @@ jobs:
         command: ./gradlew build
     - store_artifacts:
         path: app/
-        destination: artifact-file
-
+        destination: artifact-files
 
 
 #    - run: mkdir artifacts
