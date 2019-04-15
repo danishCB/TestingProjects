@@ -5,58 +5,58 @@
 #
 #
 #
-#general:
-#  artifacts:
-#  - D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
-#
-#machine:
-#  environment:
-#    ANDROID_HOME: C:\Users\Danish\AppData\Local\Android\Sdk
-#
-#dependencies:
-#  override:
-#  - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-26.0.2,android-26,extra-google-m2repository,extra-google-google_play_services,extra-android-support
-#  - ANDROID_HOME= C:\Users\Danish\AppData\Local\Android\Sdk ./gradlew dependencies
-#
-#test:
-#  override:
-#  - (./gradlew assemble):
-#timeout: 360
+general:
+  artifacts:
+  - D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app\build
+
+machine:
+  environment:
+    ANDROID_HOME: C:\Users\Danish\AppData\Local\Android\Sdk
+
+dependencies:
+  override:
+  - echo y | android update sdk --no-ui --all --filter tools,platform-tools,build-tools-26.0.2,android-26,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+  - ANDROID_HOME= C:\Users\Danish\AppData\Local\Android\Sdk ./gradlew dependencies
+
+test:
+  override:
+  - (./gradlew assemble):
+timeout: 360
 
 
-version: 1
-jobs:
-  build:
-    working_directory: ~/TesingProjects
-    docker:
-    - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx1536m
-    steps:
-    - checkout
-#    - restore_cache:
-#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-    #      - run:
-    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-    #         command: sudo chmod +x ./gradlew
-    - run:
-        name: chmod permissions
-        command: chmod +x ./gradlew
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - store_artifacts:
-        path: app/build/
-        destination: reports
-    - store_test_results:
-        path: app/build/
-    - run:
-        name: Run Build
-        command: ./gradlew build
-    - store_artifacts:
-        path: app/build/
-        destination: artifact-file
+#version: 1
+#jobs:
+#  build:
+#    working_directory: ~/TesingProjects
+#    docker:
+#    - image: circleci/android:api-25-alpha
+#    environment:
+#      JVM_OPTS: -Xmx1536m
+#    steps:
+#    - checkout
+##    - restore_cache:
+##        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+#    #      - run:
+#    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#    #         command: sudo chmod +x ./gradlew
+#    - run:
+#        name: chmod permissions
+#        command: chmod +x ./gradlew
+#    - save_cache:
+#        paths:
+#        - ~/.gradle
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#    - store_artifacts:
+#        path: app/build/
+#        destination: reports
+#    - store_test_results:
+#        path: app/build/
+#    - run:
+#        name: Run Build
+#        command: ./gradlew build
+#    - store_artifacts:
+#        path: app/build/
+#        destination: artifact-file
 
 #    - save_cache:
 #        paths:
