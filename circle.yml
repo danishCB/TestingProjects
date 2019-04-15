@@ -88,15 +88,15 @@ jobs:
         - ~/.gradle
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - store_artifacts:
-        path: app/build/reports
+        path: app/
         destination: reports
     - store_test_results:
-        path: app/build/test-results
+        path: app/
     - run:
         name: Run Build
         command: ./gradlew build
     - store_artifacts:
-        path: app/build/outputs/apk/debug/
+        path: app/
         destination: apks/
 
 
