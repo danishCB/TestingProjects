@@ -1,3 +1,9 @@
+#
+# Build configuration for Circle CI
+#
+
+
+
 general:
   artifacts:
   - D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
