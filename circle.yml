@@ -97,7 +97,7 @@ jobs:
         command: ./gradlew build
      - store_artifacts:
         path: app/build/outputs/apk/
-        destination: apks/
+        destination: apks
 #     - run:
 #         name: Run Build
 #         command: ./gradlew assembleRelease
