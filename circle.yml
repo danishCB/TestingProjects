@@ -97,7 +97,7 @@ jobs:
         command: ./gradlew build
     - store_artifacts:
         path: app/
-        destination: apks/
+        destination: apks/*.apk
 
 
 
