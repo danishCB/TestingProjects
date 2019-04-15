@@ -94,7 +94,7 @@ jobs:
         path: app/
     - run:
         name: Run Build
-        command: ./gradlew build
+        command: ./gradlew assembleDebug
     - store_artifacts:
         path: app/
         destination: artifact-files
