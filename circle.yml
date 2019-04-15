@@ -94,7 +94,7 @@ jobs:
         path: app/
     - run:
           name: Initial build
-          command: ./gradlew clean assembleRelease --no-daemon --stacktrace
+          command: ./gradlew build
      - store_artifacts:
           path: app/build/outputs/apk/
           destination: apks/
