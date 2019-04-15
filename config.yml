@@ -55,7 +55,7 @@ jobs:
         name: Run Build
         command: ./gradlew build
     - store_artifacts:
-        path: app
+        path: app/
         destination: artifact-file
 
 #    - save_cache:
