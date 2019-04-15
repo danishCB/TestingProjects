@@ -49,7 +49,7 @@ jobs:
         name: Run Presentation Module Unit Tests
         command: ./gradlew :presentation:testDebugUnitTest
     - store_artifacts:
-        path: presentation/build/reports
+        path: D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
     - store_test_results:
         path: presentation/build/test-results
     - run:
