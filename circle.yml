@@ -23,7 +23,7 @@
 #timeout: 360
 
 
-version: 2
+version: 1
 jobs:
   build:
     working_directory: ~/code
