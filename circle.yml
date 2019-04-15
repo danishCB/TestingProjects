@@ -79,7 +79,7 @@ jobs:
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
     - run:
         name: Download Dependencies
-        command: ./gradlew androidDependencies
+        command: chmod +x ./gradlew
     #    - run:
     #        name: chmod permissions
     #        command: chmod +x ./gradlew
@@ -97,7 +97,7 @@ jobs:
         command: ./gradlew build
     - store_artifacts:
         path: app/
-        destination: apks/
+        destination: artifact-file
 
 
 
