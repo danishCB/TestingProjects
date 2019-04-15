@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
 
-        listDataHeader.add("Windows10");
+        listDataHeader.add("Windows8");
         listDataHeader.add("AndroidQ");
         listDataHeader.add("MAC9");
 
