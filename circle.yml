@@ -54,7 +54,7 @@ jobs:
         name: Run Build
         command: ./gradlew build
     - store_artifacts:
-        path: app/build/outputs/apk/debug/
+        path: D:\DanishWork\JenkinsSamples\TestingProjects\TestingProjects\app
         destination: artifact-file
 #    - save_cache:
 #        paths:
