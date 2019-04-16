@@ -1,38 +1,52 @@
-version: 2
-jobs:
-  build:
-    # working_directory: ~/code
-    docker:
-    - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx3200m
-    steps:
-    - checkout
-    #    - restore_cache:
-    #        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
-    #      - run:
-    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-    #         command: sudo chmod +x ./gradlew
-    - restore_cache:
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - run:
-        name: Download Dependencies
-        command: chmod +x ./gradlew
-    #    - run:
-    #        name: chmod permissions
-    #        command: chmod +x ./gradlew
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-    - store_artifacts:
-        path: app/
-        destination: reports
-    - store_test_results:
-        path: app/
-    - run:
-        name: Run Build
-        command: ./gradlew build
-    - store_artifacts:
-        path: app/
-        destination: artifact-files
+#version: 2
+#jobs:
+#  build:
+#    # working_directory: ~/code
+#    docker:
+#    - image: circleci/android:api-25-alpha
+#    environment:
+#      JVM_OPTS: -Xmx3200m
+#    steps:
+#    - checkout
+#    #    - restore_cache:
+#    #        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
+#    #      - run:
+#    #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#    #         command: sudo chmod +x ./gradlew
+#    - restore_cache:
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#    - run:
+#        name: Download Dependencies
+#        command: chmod +x ./gradlew
+#    #    - run:
+#    #        name: chmod permissions
+#    #        command: chmod +x ./gradlew
+#    - save_cache:
+#        paths:
+#        - ~/.gradle
+#        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#    - store_artifacts:
+#        path: app/
+#        destination: reports
+#    - store_test_results:
+#        path: app/
+#    - run:
+#        name: Run Build
+#        command: ./gradlew build
+#    - store_artifacts:
+#        path: app/
+#        destination: artifact-files
+
+
+language: java
+jdk:
+- oraclejdk7
+install:
+- sudo apt-get install -u lib32stdc++6 lib32z1
+- ./gradlew clean assemble
+script:
+- ./gradlew check
+notifications:
+  email:
+    recipients:
+    - danish.hassan@citrusbits.com
