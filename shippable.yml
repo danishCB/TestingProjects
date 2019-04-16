@@ -9,8 +9,8 @@ before_script:
 script:
 - chmod +x gradlew
 after_script:
-- cp -r build/test-results/* shippable/testresults/
+- cp -r build/test-results/*
 notifications:
   email:
     recipients:
-    - danish.hassan@citrusbits.com
+    #- danish.hassan@citrusbits.com
