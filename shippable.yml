@@ -1,0 +1,12 @@
+language: java
+jdk:
+- oraclejdk7
+install:
+- sudo apt-get install -u lib32stdc++6 lib32z1
+- ./gradlew clean assemble
+script:
+- ./gradlew check
+notifications:
+  email:
+    recipients:
+    - danish.hassan@citrusbits.com
